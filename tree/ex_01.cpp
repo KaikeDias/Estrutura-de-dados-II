@@ -80,19 +80,59 @@ bool estaNaArvore(Tree arvore, int item) {
     if(arvVazia(arvore)) {
         return false;
     }else if(arvore->value == item) {
-        return true;
+        
     }
 
     return estaNaArvore(arvore->left, item) || estaNaArvore(arvore->right, item);
 }
 
-int main() {
-    Tree arvore = criarArvore(1, criarArvoreVazia(), criarArvore(2, criarArvoreVazia(), criarArvore(3, criarArvoreVazia(), criarArvoreVazia())));
+//Questao 13.6
+bool ehEstritamenteBinaria(Tree arvore) {
+    if(arvVazia(arvore)) {
+        return true;
+    } else {
+        if(arvore->left != NULL && arvore->right != NULL) {
+            return true;
+        }else {
+            return false;
+        }
 
-    arvoreImprime(arvore);
-    cout << "\n" << qtdNos(arvore) << endl;
-    cout << qtdFolhas(arvore) << endl;
-    cout << altura(arvore) << endl;
-    cout << estaNaArvore(arvore, 1) << endl;
-    cout << estaNaArvore(arvore, 5) << endl;
+        return ehEstritamenteBinaria(arvore->left) && ehEstritamenteBinaria(arvore->right);
+    }
+}
+
+//Questao 13.7
+bool igual(Tree arvore1, Tree arvore2) {
+     if (((arvore1) == NULL) != ((arvore2) == NULL)) 
+       return false;
+       
+    if ((arvore1) == (arvore2)) 
+       return true;
+       
+    if ((arvore1)->value != (arvore2)->value) 
+       return false;
+       
+    if (!igual(((arvore1)->left), ((arvore2)->left))) 
+        return false;
+        
+    if (!igual(((arvore1)->right), ((arvore2)->right)))
+        return false;
+        
+    return true;
+}
+
+int main() {
+    Tree arvore1 = criarArvore(1, criarArvoreVazia(), criarArvore(2, criarArvoreVazia(), criarArvore(3, criarArvoreVazia(), criarArvoreVazia())));
+    Tree arvore2 = criarArvore(1, criarArvoreVazia(), criarArvore(2, criarArvoreVazia(), criarArvore(3, criarArvoreVazia(), criarArvoreVazia())));
+    Tree arvore3 = criarArvore(1, criarArvore(2, criarArvoreVazia(), criarArvoreVazia()), criarArvore(3, criarArvoreVazia(), criarArvoreVazia()));
+
+    arvoreImprime(arvore1);
+    cout << "\n" << qtdNos(arvore1) << endl;
+    cout << qtdFolhas(arvore1) << endl;
+    cout << altura(arvore1) << endl;
+    cout << estaNaArvore(arvore1, 1) << endl;
+    cout << estaNaArvore(arvore1, 5) << endl;
+
+    cout << ehEstritamenteBinaria(arvore3) << endl;
+    cout << igual(arvore1, arvore2);
 }
