@@ -121,6 +121,17 @@ bool igual(Tree arvore1, Tree arvore2) {
     return true;
 }
 
+//Questao 13.8
+
+
+//Questao 13.9
+void exibe_dec(Tree arvore) {
+    if(arvore == NULL) return;
+    exibe_dec(arvore->right);
+    cout << arvore->value << endl;
+    exibe_dec(arvore->left);
+}
+
 int main() {
     Tree arvore1 = criarArvore(1, criarArvoreVazia(), criarArvore(2, criarArvoreVazia(), criarArvore(3, criarArvoreVazia(), criarArvoreVazia())));
     Tree arvore2 = criarArvore(1, criarArvoreVazia(), criarArvore(2, criarArvoreVazia(), criarArvore(3, criarArvoreVazia(), criarArvoreVazia())));
