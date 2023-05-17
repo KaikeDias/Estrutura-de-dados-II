@@ -115,6 +115,22 @@ Arv removeNo(Arv no, char valor) {
     }
 }
 
+bool arvoreBinariaCheia(Arv no) {
+    if (no == NULL) {
+        return true; // Árvore vazia
+    }
+
+    if (no->esq == NULL && no->dir == NULL) {
+        return true;
+    }
+
+    if (no->esq != NULL && no->dir != NULL) {
+        return arvoreBinariaCheia(no->esq) && arvoreBinariaCheia(no->dir);
+    }
+
+    return false;
+}
+
 
 	        
 int main() {
@@ -128,6 +144,7 @@ int main() {
     
     removeNo(a, 'b');
     imprime(a); // saída esperada: <a<c<><>>>
+    cout << /n << arvoreBinariaCheia(a);
 }
 	
 
