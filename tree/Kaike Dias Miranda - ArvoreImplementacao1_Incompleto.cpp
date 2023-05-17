@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<iostream>
 #include<stdlib.h>
+#include <queue>
 using namespace std;
 
 typedef struct arv {
@@ -11,7 +12,7 @@ typedef struct arv {
 
 
 Arv arvore(char x,Arv e,Arv d){
-	Arv novo=(Arv )malloc(sizeof(a 	rv));
+	Arv novo=(Arv )malloc(sizeof(arv));
 	novo->esq=e;
 	novo->dir=d;
 	novo->info=x;
@@ -131,6 +132,47 @@ bool arvoreBinariaCheia(Arv no) {
     return false;
 }
 
+bool arvoreCompleta(Arv no) {
+    if (no == NULL) {
+        return true;
+    }
+    
+    queue<Arv> fila;
+    fila.push(no);
+    bool encontrouNivelIncompleto = false;
+    
+    while (!fila.empty()) {
+        Arv atual = fila.front();
+        fila.pop();
+        
+        // Verifica se o nó atual possui ambos os filhos
+        if (atual->esq && atual->dir) {
+            // Se já encontramos um nível anterior incompleto, a árvore não é completa
+            if (encontrouNivelIncompleto) {
+                return false;
+            }
+            fila.push(atual->esq);
+            fila.push(atual->dir);
+        } else {
+            // Se encontramos um nível incompleto, marca a flag
+            encontrouNivelIncompleto = true;
+            
+            // Verifica se o nó atual possui apenas um filho
+            if ((atual->esq && !atual->dir) || (!atual->esq && atual->dir)) {
+                return false;
+            }
+            
+            // Se algum dos filhos é nulo, não há mais nós para adicionar à fila
+            if (atual->esq) {
+                fila.push(atual->esq);
+            }
+        }
+    }
+    
+    return true;
+}
+
+
 
 	        
 int main() {
@@ -144,7 +186,8 @@ int main() {
     
     removeNo(a, 'b');
     imprime(a); // saída esperada: <a<c<><>>>
-    cout << /n << arvoreBinariaCheia(a);
+    cout << "\n" << arvoreBinariaCheia(a);
+    cout << "\n" << arvoreCompleta(a);
 }
 	
 
