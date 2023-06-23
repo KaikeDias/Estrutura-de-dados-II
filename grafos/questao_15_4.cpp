@@ -1,3 +1,5 @@
+//Grupo: Kaike Dias, Kelson Eduardo, Igor Julliano
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
