@@ -1,3 +1,5 @@
+//Grupo: Kaike Dias, Kelson Eduardo, Igor Julliano
+
 #include "Fila.cpp"
 
 void bfs(int v, int w, Lista Adj[]){
@@ -8,7 +10,7 @@ void bfs(int v, int w, Lista Adj[]){
         if(c->item == w){
             exibe_invertido(c);
             puts("");
-        } else 
+        } else
         for (Lista s = Adj[c->item]; s; s = s->prox)
             if(!pertence(s->item,c)) enfileira(no(s->item, clone(c)), F);
         destruir(&c);
